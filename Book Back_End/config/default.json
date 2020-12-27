@@ -1,0 +1,21 @@
+{
+  "connection": {
+    "user": "webUser",
+    "password": "Password@12345qwert",
+    "server": "faisal-db.database.windows.net",
+    "database": "faisal-db",
+    "parseJSON": true,
+    "options": {
+      "encrypt": true,
+      "enableArithAbort": false
+    },
+    "pool": {
+      "min": 2,
+      "max": 4,
+      "idleTimeoutMillis": 30000
+    }
+  },
+  "keys": {
+    "secret": "Something no one can guess!!!!"
+  }
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Books from Azure Database API</title>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">ONLINE BOOK SHOP</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a id="login" class="nav-link" href="#"
+                ><span class="oi oi-account-login link-icon"></span>Login</a
+              >
+            </li>
+            <li class="nav-item">
+              <a id="get-profile" class="nav-link" href="#"
+                ><span class="oi oi-person link-icon"></span>Profile</a
+              >
+            </li>
+            <li class="nav-item">
+              <a id="logout" class="nav-link" href="#"
+                ><span class="oi oi-account-logout link-icon"></span>Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row"></div>
+      <div id="results"><pre></pre></div>
+      <div class="row">
+        <!-- Page Header -->
+        <h2 class="mt-5">
+          Book by
+          <div></div>
+          Category
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <!-- Page Body Left Column (menu) -->
+          <div id="categoryList" class="list-group">
+            <a href="#" class="list-group-item list-group-item-action"
+              >First item</a
+            >
+            <a href="#" class="list-group-item list-group-item-action"
+              >Second item</a
+            >
+            <a href="#" class="list-group-item list-group-item-action"
+              >Third item</a
+            >
+          </div>
+        </div>
+        <div class="col-sm-10">
+          <!-- Page Body Right Side (Content goes here) -->
+
+          <div id="books">
+            <table class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <!-- <th>id</th> -->
+                  <th>BOOK-ID</th>
+                  <th>NAME</th>
+                  <th>DESCRIPTION</th>
+                  <th>STOCK</th>
+                  <th>PRICE</th>
+                </tr>
+              </thead>
+              <tbody id="bookRows"></tbody>
+            </table>
+          </div>
+          <!-- Toggle button used to show or hide the add new book form. -->
+          <button
+            id="AddBookButton"
+            onclick="bookFormSetup('Add Book')"
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#BookFormDialog"
+          >
+            Add Book
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Book Form -->
+    <div class="modal fade" id="BookFormDialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <h4 class="modal-title" id="bookFormTitle">Add a Book</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form id="bookForm">
+              <div class="form-group">
+                <label for="CategoryId">Category:</label>
+                <select
+                  id="CategoryId"
+                  class="form-control"
+                  name="CategoryId"
+                ></select>
+              </div>
+              <div class="form-group">
+                <label for="BookName">Name:</label>
+                <input
+                  id="BookName"
+                  type="text"
+                  class="form-control"
+                  name="BookName"
+                />
+              </div>
+              <div class="form-group">
+                <label for="BookDescription">Description:</label>
+                <input
+                  id="BookDescription"
+                  type="text"
+                  class="form-control"
+                  name="BookDescription"
+                />
+              </div>
+              <div class="form-group">
+                <label for="BookStock">Stock:</label>
+                <input
+                  id="BookStock"
+                  type="number"
+                  class="form-control"
+                  name="BookStock"
+                />
+              </div>
+              <div class="form-group">
+                <label for="BookPrice">Price:</label>
+                <input
+                  id="BookPrice"
+                  type="number"
+                  min="0.00"
+                  max="10000.00"
+                  step="0.01"
+                  class="form-control"
+                  name="BookPrice"
+                />
+              </div>
+              <!-- bookId is a hidden field value is not required but set = 0-->
+              <input id="BookId" type="hidden" name="bookId" value="0" />
+            </form>
+          </div>
+
+          <!-- footer -->
+          <div class="modal-footer">
+            <!-- Buttons - note onclick and data-dismiss attribtes-->
+            <button
+              onclick="addOrUpdateBook()"
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Book Form  -->
+
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- Bootstrap 4 Dependencies -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./font/css/open-iconic-bootstrap.min.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Auth0 JavaScript -->
+    <script src="https://cdn.auth0.com/js/auth0/9.14.0/auth0.min.js"></script>
+    <script src="./javascript/auth0-variables.js"></script>
+    <script src="./javascript/jwtAuth.js"></script>
+    <script src="./javascript/jwt-decode.js"></script>
+    <!-- End Auth0 JavaScript -->
+    <script src="./javascript/script.js"></script>
+  </body>
+</html>

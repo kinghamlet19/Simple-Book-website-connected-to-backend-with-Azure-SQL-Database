@@ -1,0 +1,22 @@
+body {
+  font: 400 15px Lato, sans-serif;
+  line-height: 1.8;
+  color: #f4511e !important;
+}
+h2 {
+  font-size: 24px;
+  text-transform: uppercase;
+  color: #f4511e !important;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.navbar li a,
+.navbar .navbar-brand {
+  color: #fff !important;
+}
+.navbar-nav li a:hover,
+.navbar-nav li.active a {
+  color: #f4511e !important;
+  background-color: #fff !important;
+}
